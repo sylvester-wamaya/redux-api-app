@@ -8,7 +8,7 @@ const Users = () => {
     const {users, isLoading, error } = useSelector((store) => store.users)
     useEffect(()=>{
         dispatch(getUsers())
-    },[dispatch])
+    },[getUsers])
 
     if(isLoading){
         return <h2>Is Loading...</h2>
