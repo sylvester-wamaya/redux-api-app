@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const url = 'https://randomuser.me/api/?results=5'
+const url = 'https://randomuser.me/api/?results=10'
 
 const initialState = {
     users: [],
@@ -34,10 +34,8 @@ const usersSlice = createSlice({
             state.isLoading = true
         })
         .addCase(getUsers.fulfilled, (state, action)=>{
-            console.log(action)
             state.users = action.payload.results
             state.isLoading = false
-            console.log(state.users)
         })
         .addCase(getUsers.rejected, (state, action)=>{
             state.isLoading = false
