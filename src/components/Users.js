@@ -1,9 +1,15 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import UserCard from './UserCard'
+import { getUsers } from '../store/users/usersSlice'
 
 const Users = () => {
-    const {users, isLoading, error } = useSelector((store) => store.Users)
+    const dispatch = useDispatch()
+    const {users, isLoading, error } = useSelector((store) => store.users)
+    useEffect(()=>{
+        dispatch(getUsers())
+    },[dispatch])
+
     if(isLoading){
         return <h2>Is Loading...</h2>
     }
@@ -13,7 +19,7 @@ const Users = () => {
   return (
     <div>
       {users.map((user) =>{
-        <UserCard firstName={user.name.first} lastName={user.name.last} key={user.uuid}/>
+       return <UserCard firstName={user.name.first} lastName={user.name.last} key={user.email}/>
       })}
     </div>
   )
